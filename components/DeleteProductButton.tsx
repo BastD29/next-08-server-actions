@@ -14,7 +14,7 @@ export default function DeleteProductButton({
       onClick={() => deleteProduct(productId)}
       className="border bg-red-500 text-white p-2 rounded-md w-48"
     >
-      Delete product
+      Delete
     </button>
   );
 }

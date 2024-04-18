@@ -19,13 +19,26 @@ const getProducts = async () => {
   return products;
 };
 
+const getProduct = async (id: string) => {
+  const res = await fetch(
+    `https://661fe72416358961cd95dce3.mockapi.io/products/${id}`,
+    {
+      cache: "no-cache",
+    }
+  );
+
+  const product: Product = await res.json();
+
+  return product;
+};
+
 const addProduct = async (data: FormData) => {
   const product = data.get("product")?.toString();
   const price = data.get("price")?.toString();
 
   if (!product || !price) return;
 
-  const newProduct: Product = {
+  const newProduct: Omit<Product, "id"> = {
     product,
     price,
   };
@@ -55,7 +68,7 @@ const updateProduct = async (id: string, data: FormData) => {
 
   if (!product || !price) return;
 
-  const updatedProduct: Product = {
+  const updatedProduct: Omit<Product, "id"> = {
     product,
     price,
   };
@@ -71,4 +84,4 @@ const updateProduct = async (id: string, data: FormData) => {
   revalidateTag("products");
 };
 
-export { getProducts, addProduct, deleteProduct, updateProduct };
+export { getProducts, getProduct, addProduct, deleteProduct, updateProduct };
