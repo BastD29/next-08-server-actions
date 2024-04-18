@@ -41,4 +41,34 @@ const addProduct = async (data: FormData) => {
   revalidateTag("products");
 };
 
-export { getProducts, addProduct };
+const deleteProduct = async (id: string) => {
+  await fetch(`https://661fe72416358961cd95dce3.mockapi.io/products/${id}`, {
+    method: "DELETE",
+  });
+
+  revalidateTag("products");
+};
+
+const updateProduct = async (id: string, data: FormData) => {
+  const product = data.get("product")?.toString();
+  const price = data.get("price")?.toString();
+
+  if (!product || !price) return;
+
+  const updatedProduct: Product = {
+    product,
+    price,
+  };
+
+  await fetch(`https://661fe72416358961cd95dce3.mockapi.io/products/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(updatedProduct),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  revalidateTag("products");
+};
+
+export { getProducts, addProduct, deleteProduct, updateProduct };

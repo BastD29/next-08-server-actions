@@ -1,5 +1,6 @@
 import { addProduct, getProducts } from "@/actions/serverActions";
 import AddProductButton from "@/components/AddProductButton";
+import DeleteProductButton from "@/components/DeleteProductButton";
 
 export default async function Home() {
   const products = await getProducts();
@@ -38,6 +39,7 @@ export default async function Home() {
           <div key={product.id} className="p-5 shadow">
             <p>{product.product}</p>
             <p>{product.price}</p>
+            <DeleteProductButton productId={product.id} />
           </div>
         ))}
       </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { addProduct } from "@/actions/serverActions";
-import { useTransition } from "react";
+// import { useTransition } from "react";
 
 export default function AddProductButton() {
   // useTransition enables UI update at the same time thanks to isPending
